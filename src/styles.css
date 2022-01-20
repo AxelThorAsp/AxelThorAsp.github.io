@@ -15,6 +15,14 @@ section{
     font-size: 40px;
     
 }
+
+.hero2{
+    background-color: #1c1d25;
+    height: 200px;
+    color: white;
+    font-size: 40px;
+    
+}
 footer{
     padding: 80px;
     background-color: black;
@@ -132,6 +140,7 @@ h2{
 .headshot-container{
     display: flex;
     align-items: center;
+    padding: 40px;
 }
 
 .project-card{
@@ -178,3 +187,25 @@ font-weight: 700;
  font-size: 40px;
 
 }
+
+
+.article{
+    margin: 50px;
+    padding: 80px;
+}
+
+.text{
+    font-size: 20px;
+    text-align: justify;
+    padding: 20px;
+}
+
+pre code {
+    background-color: #555753;
+    border: 1px solid #999;
+    display: block;
+    color: white;
+    padding: 1px;
+    font-size: 20px;
+    margin-right: 500px;
+  }
