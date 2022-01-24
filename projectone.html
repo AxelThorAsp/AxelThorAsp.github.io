@@ -32,21 +32,17 @@
             <p class="text">Download the latest version of Git at <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">https://git-scm.com/downloads.</a>
             </p>
             <p class="text">Next, set your Git username. Open Git Bash and set a username by typing: </p>
-            <code class="codeblock">
-                $ git config --global user.name "Mona Lisa"
+            <code class="codeblock">$ git config --global user.name "Mona Lisa"
             </code>
             <p class="text ">Confirm that you have set your Git username correctly: </p>
-            <code class="codeblock">
-                $ git config --global user.name
-
-                > Mona Lisa
+            <code class="codeblock">$ git config --global user.name
+> Mona Lisa
             </code>
 
             <p class="text">
             Set your commit email address by typing in Git Bash:
             </p>
-            <code class="codeblock">
-                $ git config --global user.email "email@example.com"
+            <code class="codeblock">$ git config --global user.email "email@example.com"
             </code>
             <p class="text ">If you wish to keep your email address private please see <a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-user-account/managing-email-preferences/setting-your-commit-email-address"> GitHub-provided no-reply email address.</a> </p>
             
@@ -58,16 +54,14 @@
             <p class="text"> 
                 To generate a new SSH key on your computer open Git Bash and paste the text below, substituting in your GitHub email address. 
             </p>
-            <code class="codeblock">
-                $ ssh-keygen -t ed25519 -C "your_email@example.com"
+            <code class="codeblock">$ ssh-keygen -t ed25519 -C "your_email@example.com"
             </code>
             <p class="text"> To save the key in the default location press Enter when prompted.</p>
             <p class="text">Next, type a secure password.</p>
             <p> <b> Add the SSH key to your GitHub account </b> </p>
             <p class="text"> Copy the SSH public key to your clipboard. If you saved it in the default directory you can paste the text below in to Git Bash. Otherwise locate the hidden <code> .ssh </code> folder, open it, and copy the key to your clipboard. </p>
-            <code class="codeblock">
-                $ clip < ~/.ssh/id_ed25519.pub
-                # Copies the contents of the id_ed25519.pub file to your clipboard
+            <code class="codeblock">$ clip < ~/.ssh/id_ed25519.pub
+# Copies the contents of the id_ed25519.pub file to your clipboard
             </code>
             <p class="text">Now, log in to your GitHub account, if you haven't already, create one <a class="black" href="https://www.github.com"><u> <b> here. </b> </u></a></p> 
             <p class="text">
@@ -86,9 +80,8 @@
             Type this in to Git Bash to connect your repo to GitHub.
             </p>
             
-            <code class="codeblock">
-                $ git remote add origin git@github.com:[username]/[name of repo]
-                $ git push -u origin master
+            <code class="codeblock">$ git remote add origin git@github.com:[username]/[name of repo]
+$ git push -u origin master
             </code>
 
             <p class="text">
