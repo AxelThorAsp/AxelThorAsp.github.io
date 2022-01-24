@@ -198,11 +198,22 @@ font-weight: 700;
 
 }
 
-
+@media (min-width:1200px){
 .article{
     margin-left: 300px;
     margin-right: 300px;
     padding: 80px;
+    
+}
+
+}
+
+@media (max-width:480px) {
+    .article{
+        margin-left: 50px;
+        margin-right: 50px ;
+        padding: 40px;
+    }
 }
 
 .text{
@@ -211,13 +222,14 @@ font-weight: 700;
     padding: 20px;
 }
 
+
 .codeblock {
     font-family: Consolas,"courier new";
     color: blue;
     background-color: #f1f1f1;
     /* border: 1px solid  black; */
     padding: 1px;
-    font-size: 105%;
+    font-size: 20px;
     display: flex;
     white-space: pre-wrap   
   }
