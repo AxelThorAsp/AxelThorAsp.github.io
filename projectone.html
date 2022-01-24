@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="src/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" type="image/png" href="src/images/favicon-32x32.png" sizes="32x32" />
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8"/>
     <title>My HTML Project</title>
@@ -16,9 +17,9 @@
                <a href="index.html"> <img class ="logo" src="src/images/cat.png"></a>
 
                 <ul>
-                    <li> <a href ="index.html#about-me"> About me</a></li>
-                    <li><a href ="index.html#projects"> Projects </a></li>
-                    <li><a href="index.html#contact"> Contact </a> </li>
+                    <li> <a class="white" href ="index.html#about-me"> About me</a></li>
+                    <li><a class = "white" href="index.html#contact"> Contact </a> </li>
+                    <li><a class = "white" href ="index.html#projects"> Projects </a></li>
                 </ul>
 
             </nav>
@@ -26,14 +27,90 @@
         <section class="article">
             <h1>Making The Website</h1>
             <h2>Setting up Git</h2>
-            <p class="text">"Now is the time for all good men to come to the aid of the party" is a phrase first proposed as a typing drill by instructor Charles E. Weller; its use is recounted in his book The Early History of the Typewriter, p. 21 (1918).[1] Frank E. McGurrin, an expert on the early Remington typewriter, used it in demonstrating his touch typing abilities in January 1889.[2] It has appeared in a number of typing books, often in the form "Now is the time for all good men to come to the aid of their country."[3]</p>
-            <pre>
-                <code>
-                  $ print("goodbye, world")
-                </code>
-             </pre>
-             <h2>HTML</h2>
-             <p class="text">"Now is the time for all good men to come to the aid of the party" is a phrase first proposed as a typing drill by instructor Charles E. Weller; its use is recounted in his book The Early History of the Typewriter, p. 21 (1918).[1] Frank E. McGurrin, an expert on the early Remington typewriter, used it in demonstrating his touch typing abilities in January 1889.[2] It has appeared in a number of typing books, often in the form "Now is the time for all good men to come to the aid of their country."[3] </p>
+            <p class="text ">This is a tutorial on how to make a website of your own.</p>
+            <p class="text"> This website is hosted on GitHub. In order to use GitHub effectively you will need to set up Git on your machine. </p>
+            <p class="text">Download the latest version of Git at <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer">https://git-scm.com/downloads.</a>
+            </p>
+            <p class="text">Next, set your Git username. Open Git Bash and set a username by typing: </p>
+            <code class="codeblock">
+                $ git config --global user.name "Mona Lisa"
+            </code>
+            <p class="text ">Confirm that you have set your Git username correctly: </p>
+            <code class="codeblock">
+                $ git config --global user.name
+
+                > Mona Lisa
+            </code>
+
+            <p class="text">
+            Set your commit email address by typing in Git Bash:
+            </p>
+            <code class="codeblock">
+                $ git config --global user.email "email@example.com"
+            </code>
+            <p class="text ">If you wish to keep your email address private please see <a href="https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-github-user-account/managing-email-preferences/setting-your-commit-email-address"> GitHub-provided no-reply email address.</a> </p>
+            
+            <p> <b>Authenticating with GitHub from Git over SSH</b> </p>
+
+            <p class="text">
+                To clone with SSH you must generate SSH keys on each computer you use to push and pull from GitHub.
+            </p>
+            <p class="text"> 
+                To generate a new SSH key on your computer open Git Bash and paste the text below, substituting in your GitHub email address. 
+            </p>
+            <code class="codeblock">
+                $ ssh-keygen -t ed25519 -C "your_email@example.com"
+            </code>
+            <p class="text"> To save the key in the default location press Enter when prompted.</p>
+            <p class="text">Next, type a secure password.</p>
+            <p> <b> Add the SSH key to your GitHub account </b> </p>
+            <p class="text"> Copy the SSH public key to your clipboard. If you saved it in the default directory you can paste the text below in to Git Bash. Otherwise locate the hidden <code> .ssh </code> folder, open it, and copy the key to your clipboard. </p>
+            <code class="codeblock">
+                $ clip < ~/.ssh/id_ed25519.pub
+                # Copies the contents of the id_ed25519.pub file to your clipboard
+            </code>
+            <p class="text">Now, log in to your GitHub account, if you haven't already, create one <a class="black" href="https://www.github.com"><u> <b> here. </b> </u></a></p> 
+            <p class="text">
+                Click on <b>Settings</b>. Go to <b> SSH and GPG keys.</b> Click <b>New SSH key  </b>. Paste your key into the "Key" field. <b>Click Add SSH key. </b>
+            </p> 
+            <p><b>Create a repository</b></p>
+            <p class="text">
+                A repository tracks and saves the history of all changes you make to your project.
+
+            Navigate to the directory where you wish to store your project. In the directory, type <code>git init</code>.
+            Now, go to GitHub.com and click the <b>new repository</b> button. Click the <b>Create repository</b> button.
+            <b>
+                It is very important that you name the repo {username}.github.io.
+            </b>
+
+            Type this in to Git Bash to connect your repo to GitHub.
+            </p>
+            
+            <code class="codeblock">
+                $ git remote add origin git@github.com:[username]/[name of repo]
+                $ git push -u origin master
+            </code>
+
+            <p class="text">
+                Congratulations, you are now ready to <code>git commit</code> and <code>git add</code> to GitHub.
+            </p>
+            <h2>HTML</h2>
+             <p class="text">
+                 Making this website was my first time using HTML. First I considered using one of the templates available on <b> <u> <a class="black" href="https://html5up.net/">html5up.net.</a></u> </b>
+                After downloading a template that I liked, I opened the <code>index.html</code> file and started to try and figure things out. After a short while I realized that changing all of the sample text and the default layout of the template would be tedious and tiresome work. So I decided to make make my website from scatch. I also figured that way I would learn a lot more.
+            </p>
+            <p class="text" >
+            I searched the web for tutorials and resources on learning HTML. I began by reading up on an introductory HTML tutorial on <b><u><a class="black" href="https://www.w3schools.com/html/default.asp">this w3schools page. </a> </u> </b>
+            
+            </p>
+            <p class="text">After learning the basics, I searched YouTube for tutorials on making a portfolio with HTML. Where I found this video.</p>
+
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/-D6oTPA4vXc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            <p class="text "> I followed the video to get the layout of the page. After I had the layout ready I began to fill in my information and customize the page to my liking. Then, I pushed the page to my GitHub repo.</p>
+
+            <p><b> Publishing the page </b> </p>
+            <p class="text"> To publish your page using GitHub navigate to the repo that your site is located at. Click on <b>Settings.</b> Find <b>GitHub Pages</b> and select the branch from which you wish to launch your page. And you should be all set. Your site is now live at <code> https://{username}.github.io</code>. </p>
         </section>
     </body>
 </html>

@@ -9,7 +9,7 @@ section{
 }
 
 .hero{
-    background-color: #1c1d25;
+    background-color: #06168f;
     height: 100vh;
     color: white;
     font-size: 40px;
@@ -17,7 +17,7 @@ section{
 }
 
 .hero2{
-    background-color: #1c1d25;
+    background-color: #06168f;
     height: 200px;
     color: white;
     font-size: 40px;
@@ -38,10 +38,11 @@ nav{
 
 ul{
     display: flex;
+    margin-right: 20px;
     list-style-type: none;
     width: 500px;
     justify-content: space-around;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 li{
@@ -83,7 +84,7 @@ p{
     height: 50px;
     border-radius: 30px;
     margin-top: 10px;
-    background-color: coral;
+    background-color: #000000;
     text-align: center;
     text-align: center;
     font-size: 35px;
@@ -175,9 +176,18 @@ hr{
     margin-right: 20px;
 }
 
+.white{
+
+    color: white;
+}
+
+.black{
+
+    color: black;
+}
+
 a{
     text-decoration: none;
-    color: white;
 }
 
 .project-link{
@@ -190,7 +200,8 @@ font-weight: 700;
 
 
 .article{
-    margin: 50px;
+    margin-left: 300px;
+    margin-right: 300px;
     padding: 80px;
 }
 
@@ -200,12 +211,15 @@ font-weight: 700;
     padding: 20px;
 }
 
-pre code {
-    background-color: #555753;
-    border: 1px solid #999;
-    display: block;
-    color: white;
+.codeblock {
+    font-family: Consolas,"courier new";
+    color: blue;
+    background-color: #f1f1f1;
+    /* border: 1px solid  black; */
     padding: 1px;
-    font-size: 20px;
-    margin-right: 500px;
+    font-size: 105%;
+    display: flex;
+    white-space: pre-wrap   
   }
+
+
