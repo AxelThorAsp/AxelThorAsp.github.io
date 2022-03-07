@@ -200,8 +200,8 @@ font-weight: 700;
 
 @media (min-width:1200px){
 .article{
-    margin-left: 300px;
-    margin-right: 300px;
+    margin-left: 12pc;
+    margin-right: 12pc;
     padding: 80px;
     
 }
@@ -210,9 +210,9 @@ font-weight: 700;
 
 @media (max-width:480px) {
     .article{
-        margin-left: 50px;
-        margin-right: 50px ;
-        padding: 40px;
+        margin-left: 75px;
+        margin-right: 75px ;
+        padding: 60px;
     }
 }
 
@@ -225,13 +225,14 @@ font-weight: 700;
 
 .codeblock {
     font-family: Consolas,"courier new";
+    text-align: left; 
     color: blue;
     background-color: #f1f1f1;
     /* border: 1px solid  black; */
-    padding: 1px;
+    padding: 2px;
     font-size: 20px;
-    display: flex;
-    white-space: pre-wrap   
+    display: flex; 
+    white-space: pre-wrap;
   }
 
 
