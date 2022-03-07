@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="src/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="icon" type="image/png" href="src/images/favicon-32x32.png" sizes="32x32" />
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <meta charset="UTF-8"/>
+        <title>Designing and fabricating a press fit model</title>
+    
+    </head>
+
+    <body style="margin :0;">
+        <section class="hero2">
+            <nav>
+               <a href="index.html"> <img class ="logo" src="src/images/cat.png"></a>
+
+                <ul>
+                    <li> <a class="white" href ="index.html#about-me"> About me</a></li>
+                    <li><a class = "white" href="index.html#contact"> Contact </a> </li>
+                    <li><a class = "white" href ="index.html#projects"> Projects </a></li>
+                </ul>
+
+            </nav>
+        </section>
+        <section class="article">
+            <h1>Making a vinyl sticker</h1>
+            <p class="text">Before making the press fit model I made a sticker out of vinyl using a vinyl cutter.</p>
+            <h2>Setting up for the vinyl cutter</h2>
+            <p class="text"> I found an image on the internet that I liked and opened it up in Inkscape. </p>
+            <img src="src/imgsProjectTwo/Screenshot (6).png" alt="Heart" style="width:864px;height:486px;">
+            <p class="text">Next, I had to change the format of the image to a vector graphic, since that's what the vinyl cutter wants. </p>
+            <p class="text">Select path and then trace bitmap. The default settings should work just fine. Select OK. And then delete the old image. Save the new image as a SVG graphic </p>
+            <a href="https://www.youtube.com/watch?v=vyFY9xSTtyk"> <p class ="text">I followed this video.</p> </a>
+            <h2>Printing the sticker </h2>
+            <p class="text">Insert the vinyl of your liking in to the machine and make sure it's even and flat. Select ROLL on the machine. Select print on the computer where your SVG is located. Select properties and Get From Machine. Override the length to be the length of your design plus a 2cm buffer. Now print. Release the vinyl from the machine and use scissors to cut out your design.</p>
+            <img src="src/imgsProjectTwo/20220216_135510211_iOS.jpg" alt="Sticker" style="width:864px;height:486px;">
+            
+            <h2>Result</h2>
+            <img src="src/imgsProjectTwo/20220216_140614057_iOS.jpg" alt="Sticker" style="width:720px;height:960px;">
+
+            <h1>Laser Cutting</h1>
+            <p>The next project was to make a pressfit, parametrically designed model.</p>
+            <p class="text"> I decided to make a simple bookstand. I used <a href="https://www.youtube.com/watch?v=yhHhSVoL1RQ&list=PLKOxluKQR2PLucnLX6aH98TfmjZO_TJWj"> this video</a> as a reference to help me design the object parametrically.
+            <p class="text"> I already knew what I wanted to make so I went straight in to Fusion 360 and started sketching. I started with the base </p>
+            <img src="src/imgsProjectTwo/Screenshot (1).png" alt="Base" style="width:864px;height:486px;">
+            <p class="text"> I made sure to make space for the plates that would press in to the base.</p> 
+            <img src="src/imgsProjectTwo/2c0f43a65122e314f02b28075d67c129.png" alt="Parameters">
+            <p class="text">Everything was set parametrically so I could change the size of the design at a later stage.</p>
+            <p class = "text">Next, I extruded the walls from the base.</p>
+            <img src="src/imgsProjectTwo/Screenshot (2).png" alt="Walls" style="width:960px;height:540px;">
+            <p class="text"> I seperated the parts in order to prepare them for the laser cutter.</p>
+            <img src="src/imgsProjectTwo/Screenshot (3).png" alt="Walls" style="width:960px;height:540px;">
+            <p class="text">Now the design was almost ready to be exported as a DXF file. But before I could do that, I needed to offset for the kerf of the laser cutter </p>
+            <p class="text"> Fusion has a helpful feature for this exact purpose.</p>
+            <p class="text"> In the manufacture section, make a new setup. In fabrication select cutting. Create a 2d profile and select the kerf of your laser cutter.</p>
+            <img src="src/imgsProjectTwo/20220212_164616656_iOS.jpg" alt="" style="width:960px;height:540px;">
+            <p class="text"> Since the laser cutter cuts down the middle of the line of your drawing, some material on both sides gets destroyed. In order to account for this, one must measure the kerf of the cutter. For the process please see <a href="https://hag922.github.io/VEL608G2/assignment2.html">this page. Where my team documented the procedure.</a></p>
+
+            <p class="text">Next, I prepared the design in Inkscape. <a href="https://www.youtube.com/watch?v=3eLXDtVrqKI"> I followed this helpful video.</a></p>
+
+            <p class="text"> After that was finished I opened the SVG in the laser cutter printing software and followed the instructions given to me by my teacher. Selecting the right speed, hertz and so forth.</p>
+            <img src="src/imgsProjectTwo/20220216_150656074_iOS.jpg" alt="" style="width:720px;height:960px;" >
+
+            <h1>Results</h1>
+            <img src="src/imgsProjectTwo/20220216_213227747_iOS.jpg" alt="" style="width:720px;height:960px;" >
+            <img src="src/imgsProjectTwo/20220216_213242540_iOS.jpg" alt="" style="width:720px;height:960px;" >
+
+            <p class="text">I didn't encounter any issues or problems when making this object. Everything went rather smoothly.</p>
+            <p> Resources</p>
+            
+            <iframe width="560" height="315" src="https://www.youtube.com/watch?v=xSkMicpZIbA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/watch?v=fCw5lE_vbbc&t=98s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            <table style="width:50%">
+
+
+            <h2>Workload</h2>
+                <tr>
+                    <td>Kerf test</td>
+                    <td>1 hour</td>
+                    
+                </tr>
+                <tr>
+                    <td>Drawing in Fusion</td>
+                    <td>3 hours</td>
+                    
+                </tr>
+                <tr>
+                    <td>Processing in Inkscape</td>
+                    <td>2 hours</td>
+                    
+                </tr>
+                <tr>
+                    <td>Laser cutting in FabLab</td>
+                    <td>1 hour</td>
+                    
+                </tr>
+                <tr>
+                    <td>Documenting on website</td>
+                    <td>5 hours</td>
+                    
+                </tr>
+                <tr>
+                <td><b>Total</b></td>
+                <td><b>12 hours</b></td>
+                    
+                </tr>
+                </table>
+
+
+        </section>
+        
+
+    </body>
+</html>
