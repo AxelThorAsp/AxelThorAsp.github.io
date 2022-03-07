@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="src/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="icon" type="image/png" href="src/images/favicon-32x32.png" sizes="32x32" />
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <meta charset="UTF-8"/>
+        <title>3D design </title>
+    
+    </head>
+
+    <body style="margin :0;">
+        <section class="hero2">
+            <nav>
+               <a href="index.html"> <img class ="logo" src="src/images/cat.png"></a>
+
+                <ul>
+                    <li> <a class="white" href ="index.html#about-me"> About me</a></li>
+                    <li><a class = "white" href="index.html#contact"> Contact </a> </li>
+                    <li><a class = "white" href ="index.html#projects"> Projects </a></li>
+                </ul>
+
+            </nav>
+        </section>
+        <section class="article">
+            <h1>3D printing</h1>
+            <h3>The first part of this project was to design a 3D object and print it using a 3D-printer.</h3>
+            <p class="text">During this project I 3D-printed about a dozen objects for another project I had going on. Namely, a soup-feeding robot. However, since I didn't document the fabrication process, I decided to make a simple model for the purpose of showing how it's done.</p>
+            <p class="text">Open a CAD software of your liking. I used Fusion 360. I decided to make the letter A. </p>
+            <p class="text"> After finishing the design, I exported to STL. <a href="https://www.youtube.com/watch?v=I-ltiZdUFOA">I used this video</a> to guide me.</p>
+            <img src="src/imgsProjectThree/Screenshot (8).png" alt="" style="width:960px;height:540px;">
+            <p class="text">Next step is to bring the STL file over to the computer where the 3D-printer is located and open the file in Prusa Slicer.
+                <a href="https://www.youtube.com/watch?v=Ttg2wEjD784">I used this video to help me slice.</a> For all of the objects that I made I never had to do much other than let the software decide all the settings for me. Whenever I needed extra support I let Prusa Slicer make one for me. In all cases it came out just fine.
+            </p>
+            <p class="text"> I then exported the G-code and took it over to the printer. I turned it on and waited for it to heat up. When it was ready I started printing. This print took about half and hour.</p>
+            <img src="src/IMG_2100.JPG" alt="" style="width:720px;height:960px;">
+            <img src="src/IMG_2101.JPG" alt="" style="width:720px;height:960px;">
+            <img src="src/IMG_2102.JPG" alt="" style="width:720px;height:960px;">
+        
+            
+            
+
+
+
+            <h2>3D-printed robot</h2>
+            <p class = "text">
+            All of the parts of me and my schoolmates robot were 3D-printed. Here are some images.
+            </p>
+            <!-- Slideshow container -->
+<div class="slideshow-container">
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides fade">
+      <div class="numbertext">1 / 4</div>
+      <img src="src/IMG_2097.JPG" style="width:100%">
+      <div class="text2"></div>
+    </div>
+  
+    <div class="mySlides fade">
+      <div class="numbertext">2 / 4</div>
+      <img src="src/IMG_2093.JPG" style="width:100%">
+      <div class="text2"></div>
+    </div>
+  
+    <div class="mySlides fade">
+      <div class="numbertext">3 / 4</div>
+      <img src="src/IMG_2091.JPG" style="width:100%">
+      <div class="text2"></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">4 / 4</div>
+        <img src="src/IMG_2096.JPG" style="width:100%">
+        <div class="text2"></div>
+      </div>
+  
+    <!-- Next and previous buttons -->
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+  <br>
+  
+  <!-- The dots/circles -->
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    </div>
+    </section>
+
+    <h2>3D-scanning</h2>
+
+<script src="src/app.js"></script>
+    </body>
+</html>
