@@ -21,6 +21,89 @@
     
                 </nav>
             </section>
+            <section class="article">
+                <h1>Final Project</h1>
+                <h2>Description</h2>
+                <p class="text">For the final project me and my mates will be milling a flowerpot. The same pot will also be used for another project in Computer Controlled Machines.</p>
+                <h2>The Design</h2>
+                <img src="src/Proj4/pot_sketch.jpg" alt="" width="600">
+                <p class="text">Due to the fact we were already paired together in another course and had decided to create a self-watering  and -lighting flowerpot, it was ideal to make the pot in this course.
+
+                    The pot we were to design needed to fulfill the requirements for both assignments, so quite a lot of planning went into the design. Above is a rough draft of the pot. </p>
+                <p class="text">The group wanted to assemble the pot using only the methods we had learnt in this course, i.e. pressfits. The pot also required two "levels", one for the plant & and dirt and another one for the water supply. Next up we had to design the flowerpot. Fusion 360 was used to model the product. After some deliberating and some redesigns we finally landed on a design we were all happy with. Snapshots of the final design can be seen here below:</p>
+                <img src="src/Proj4/blomapottur2.png" alt="" width="400">
+                <h2>Milling</h2>
+                <p class="text">For the milling to work you first have to download an application, called <i>Vcarve</i>, and a link to the application can be found <a href="https://www.vectric.com/products/vcarve-pro" target ="_blank">here</a>. The application you can download for free is a trial version, but everything you'll need is included in that version.
+                    To get started, you first have to import your Fusion 360 drawings as a <i>.DXF</i> (Drawing Exchange Format) file, and import that into Vcarve. From there you can set your feeds and speeds, as well as the toolpaths. For your settings to be accurate you have to know what kind of milling teeth you'll be working with. In our case there were two. <b>6 mm Down-cut</b>, which means the grain is pushed downwards for a finer edge was used for the first 3 mm, and then a <b>6 mm Up-cut</b> for the rest of the milling</p>
+                <h2>Feeds And Speeds</h2>
+                <p class="text"> 
+                    The feeds and speeds were set after consultation from our teacher, and were the same for both the Down-cut and Up-cut milling teeth. A screenshot of the settings can be seen below:
+
+                </p>
+                <img src="src/Proj4/feeds_and_speeds.png" alt="" width="700">
+
+                <p class="text ">Once you've successfully set your feeds and speeds you can get started on the toolpaths </p>
+                <h2>Toolpaths</h2>
+                <p class="text">
+                    Your toolpaths represent the movement the milling machine will have to take in order to mill your object. In our case all the milling should fully penetrate the object so we click "profile toolpath". From there we create two toolpaths, one for the down-cut in the range 0 - 3mm and one for the up-cut in the range 3-18mm which should cut through the plate. Make sure you pick the right tools for each toolpath. Lastly you need to add tabs to your toolpath. The purpose of the tabs is to make sure nothing moves while the milling is taking place so that everything comes out right. Lastly you click calculate and the toolpath is ready. Below you can see the toolpaths as well as the tabs:
+
+                </p>
+                <img src="src/Proj4/toolpaths.png" alt="" width="750">
+                <h2>Assembly</h2>
+                <p class="text">
+                    After the milling was completed the only thing left to was to assemble the pot. However we noticed that the Shop bot had messed up for some unknown reason, maybe warping in the plate, but it milled the toolpath between holes in two of our sides, and the holes were in completely the wrong place on the other two. The rest of the components however fit very tightly together. After a short chat with our teacher we concluded that the most likely reason for the failure was that since the vectors were not connected together they most likely moved when they were being prepared for the Shop Bot. Since we are recourceful we decided to just make the correct holes ourselves, and trim what didn't fit together. The correct hole was first drilled with a 17mm Ø hole saw, and then used a file to achieve the square shape. The middle platform was then trimmed with a band saw to make it fit (since the holes for the platform were in the wrong place).
+
+                </p>
+                <h2>Process</h2>
+                <p class="text">Here you can find images and a short video showing the process of making the flower pot.
+                </p>
+                <div class="slideshow-container">
+                    <!-- Full-width images with number and caption text -->
+                    <div class="mySlides fade">
+                      <div class="numbertext">1 / 4</div>
+                      <img src="src/Proj4/shopbot.jpeg" style="width:100%">
+                      <div class="text2"></div>
+                    </div>
+                  
+                    <div class="mySlides fade">
+                      <div class="numbertext">2 / 4</div>
+                      <img src="src/Proj4/shopbot2.jpeg" style="width:100%">
+                      <div class="text2"></div>
+                    </div>
+                  
+                    <div class="mySlides fade">
+                      <div class="numbertext">3 / 4</div>
+                      <img src="src/Proj4/assembly (2).jpg" style="width:100%">
+                      <div class="text2"></div>
+                    </div>
+                
+                    <div class="mySlides fade">
+                        <div class="numbertext">4 / 4</div>
+                        <img src="src/Proj4/assembly (3).jpg" style="width:100%">
+                        <div class="text2"></div>
+                      </div>
+                  
+                    <!-- Next and previous buttons -->
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                  </div>
+                  <br>
+                  
+                  <!-- The dots/circles -->
+                  <div style="text-align:center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                    <span class="dot" onclick="currentSlide(4)"></span>
+                    </div>
+            
+            <h2>Assembly</h2>
+            <p class="text">After the milling was completed the only thing left to was to assemble the pot. However we noticed that the Shop bot had messed up for some unknown reason, maybe warping in the plate, but it milled the toolpath between holes in two of our sides, and the holes were in completely the wrong place on the other two. The rest of the components however fit very tightly together. After a short chat with our teacher we concluded that the most likely reason for the failure was that since the vectors were not connected together they most likely moved when they were being prepared for the Shop Bot. Since we are recourceful we decided to just make the correct holes ourselves, and trim what didn't fit together. The correct hole was first drilled with a 17mm Ø hole saw, and then used a file to achieve the square shape. The middle platform was then trimmed with a band saw to make it fit (since the holes for the platform were in the wrong place).    
+            </p>
+            <h2>The final product</h2>
+            <p class="text">Finally after all the above was completed we had a great flowerpot on our hands. The group was happy with the results (even though the Shop bot messed up a little). The group also felt the experience of working with the milling machine and learning how to prepare files for milling was a valuable experience and all in all felt the assignment was a success. The assembled flower pot can be seen in the following picture:</p>
+            </section>
+            <script src="src/app.js"></script>    
         </body>
     </head>
 </html>
