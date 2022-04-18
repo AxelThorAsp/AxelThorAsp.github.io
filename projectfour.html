@@ -25,6 +25,12 @@
                 <h1>Final Project</h1>
                 <h2>Description</h2>
                 <p class="text">For the final project me and my mates will be milling a flowerpot. The same pot will also be used for another project in Computer Controlled Machines.</p>
+                <p class="text">With me in the group are Aron Björn and Hákon, please find their websites here:</p>
+                <p class="text"><a href="https://ronbear23.github.io/Modern-manufacturing-processes/index.html">Aron</a></p>
+                <p class="text"><a href="https://hag922.github.io/VEL608G2/?fbclid=IwAR3mAZSZeiFhaR74HPTNEoKISBJjBmWZ8xI_ses2KzNffkDqwkeu4tt3s_o">Hákon</a></p>
+                <h2>Project management</h2>
+                <p class="text">To make sure every member of the group had a pre-determined role in the assignment, the group decided to make a Gantt chart to give a rough estimate of time spent on each aspect of the assignment. The Gantt chart can be found here below: (note that some of the things included in the Gantt chart are only relevant to another project)</p>
+                <img src="src/Proj4/Ganttchart.png" alt="" >
                 <h2>The Design</h2>
                 <img src="src/Proj4/pot_sketch.jpg" alt="" width="600">
                 <p class="text">Due to the fact we were already paired together in another course and had decided to create a self-watering  and -lighting flowerpot, it was ideal to make the pot in this course.
@@ -35,6 +41,9 @@
                 <h2>Milling</h2>
                 <p class="text">For the milling to work you first have to download an application, called <i>Vcarve</i>, and a link to the application can be found <a href="https://www.vectric.com/products/vcarve-pro" target ="_blank">here</a>. The application you can download for free is a trial version, but everything you'll need is included in that version.
                     To get started, you first have to import your Fusion 360 drawings as a <i>.DXF</i> (Drawing Exchange Format) file, and import that into Vcarve. From there you can set your feeds and speeds, as well as the toolpaths. For your settings to be accurate you have to know what kind of milling teeth you'll be working with. In our case there were two. <b>6 mm Down-cut</b>, which means the grain is pushed downwards for a finer edge was used for the first 3 mm, and then a <b>6 mm Up-cut</b> for the rest of the milling</p>
+                
+                <p class="text"> The milling teeth can be seen below, with the up-cut on the left & the down-cut on the right:</p>
+                <img src="src/Proj4/updowncut.jpg" alt="" width="600">
                 <h2>Feeds And Speeds</h2>
                 <p class="text"> 
                     The feeds and speeds were set after consultation from our teacher, and were the same for both the Down-cut and Up-cut milling teeth. A screenshot of the settings can be seen below:
@@ -88,6 +97,10 @@
                     <a class="next" onclick="plusSlides(1)">&#10095;</a>
                   </div>
                   <br>
+
+                  <p class="text">
+                    After the Shop bot is finished you'll need a chisel to get the objects out. This can be cumbersome if you put many tabs (which "skip" a certain length in the last phase to make sure your objects don't move during milling) but it is worth it in the long run.
+                  </p>
                   
                   <!-- The dots/circles -->
                   <div style="text-align:center">
@@ -97,12 +110,77 @@
                     <span class="dot" onclick="currentSlide(4)"></span>
                     </div>
             
+            <h2>Additional parts</h2>        
+            <p class="text">The group realized not everything could me milled, either due to material or shape. Therefore three components were 3D printed, the holders for the hose responsible for watering,    
+            </p>
+            <p class="text">The group realized not everything could me milled, either due to material or shape. Therefore three components were 3D printed, the holders for the hose responsible for watering,</p>
+                        <img src="src/Proj4/haldari.png" width="500"><br>
+                        <p class="text">The bracket, shielding the microcomputer, controlling the watering and lighting</p>
+                        <img src="src/Proj4/bracket.PNG" width="500"><br>
+                        <p class="text">And the filling funnel for the water tank.</p>
+                        <img src="src/Proj4/renna.PNG" width="500"><br>
+                        
+                        <p class="text">The group also laser cut a lining for the pot, making sure the wood would not draw moisture from the soil. The image shows the lining installed, as well as the holders</p>
+                        <img src="src/Proj4/lining.jpg" width="500"><br>
+        
             <h2>Assembly</h2>
             <p class="text">After the milling was completed the only thing left to was to assemble the pot. However we noticed that the Shop bot had messed up for some unknown reason, maybe warping in the plate, but it milled the toolpath between holes in two of our sides, and the holes were in completely the wrong place on the other two. The rest of the components however fit very tightly together. After a short chat with our teacher we concluded that the most likely reason for the failure was that since the vectors were not connected together they most likely moved when they were being prepared for the Shop Bot. Since we are recourceful we decided to just make the correct holes ourselves, and trim what didn't fit together. The correct hole was first drilled with a 17mm Ø hole saw, and then used a file to achieve the square shape. The middle platform was then trimmed with a band saw to make it fit (since the holes for the platform were in the wrong place).    
             </p>
             <h2>The final product</h2>
             <p class="text">Finally after all the above was completed we had a great flowerpot on our hands. The group was happy with the results (even though the Shop bot messed up a little). The group also felt the experience of working with the milling machine and learning how to prepare files for milling was a valuable experience and all in all felt the assignment was a success. The assembled flower pot can be seen in the following picture:</p>
-            </section>
+            <img src="src/Proj4/blomapottur_complete (3).jpg" alt="" width="700">
+            <img src="src/Proj4/blomapottur_complete (2).jpg" alt="" width="700">
+            <video controls>
+                <source src="src/Proj4/blomapottur_virkni.mp4" >
+            </video>
+            <br>
+            <video controls src="src/Proj4/polycam-video.mp4"></video>   
+            <h2>My contribution</h2>
+            <p class="text">What I did.</p>
+
+            <p class="text">While Hákon did most of the drawing and designing, I helped plan the layout and orientation of the object. I oversaw the milling process with Hákon. </p>
+            My Workload
+            <table style="width:50%">
+                    <tr>
+                        <td>Deciding what to make and planning</td>
+                        <td>3 hours</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Preparing design for milling</td>
+                        <td>3 hours</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Milling</td>
+                        <td>1 hour</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Documenting </td>
+                        <td>4 hours</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Cutting and sanding</td>
+                        <td>2 hours</td>
+                        
+                    </tr>
+                    <tr>
+                    <td><b>Total</b></td>
+                    <td><b>13 hours</b></td>
+                        
+                    </tr>
+                    </table>
+
+            <h2>Leaflet</h2>
+            <p class="text">Finally, please find a leaflet for the project here</p>
+            <img src="src/Proj4/leaflet.png" alt="" width="900">
+            <h2>COPYRIGHT</h2>
+            <p class="text"><b>(c) Aron Björn Leifsson, Axel Thor Aspelund, Hákon Gunnarsson 2022</b></p> 
+            <p class="text">This work may be reproduced, modified, distributed, performed, and displayed for any purpose, but must acknowledge "Autonomous Flower Pot A.H.A.". Copyright is retained and must be preserved. The work is provided as is; no warranty is provided, and users accept all liability.</p>
+          
+        </section>
             <script src="src/app.js"></script>    
         </body>
     </head>
