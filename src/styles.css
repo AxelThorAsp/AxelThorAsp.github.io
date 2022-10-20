@@ -9,7 +9,7 @@ section{
 }
 
 .hero{
-    background-color: #06168f;
+    background-color: #131a4f;
     height: 100vh;
     color: white;
     font-size: 40px;
@@ -51,7 +51,7 @@ li{
 }
 
 h1{
-    font-size: 90px;
+    font-size: 150px;
     margin: 0;
     font-weight: 700;
 }
@@ -75,7 +75,7 @@ p{
 }
 
 .hero-text{
-    margin-left: 80px;
+    margin-left: 180px;
     margin-bottom: 200px;
 }
 
