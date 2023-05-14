@@ -1,0 +1,18 @@
+body {
+    background: #333333;
+    color: #ffff;
+    font-family: monospace;
+}
+
+#canvas{
+    cursor: pointer;
+}
+
+#buttons {
+    float: inline-start;
+}
+
+.mybutton {
+    height:75;
+    width:75px;
+}
