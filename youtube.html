@@ -17,15 +17,33 @@ function getVideoId(link) {
     }
     return videoId;
 }
-function embedVideo() {
-    var link = document.getElementById('youtubeLink').value;
-    var videoId = getVideoId(link)
+
+function embedVideo(videoId) {
     if (videoId) {
         document.getElementById('videoContainer').innerHTML = `<iframe width="420" height="345" src="https://www.youtube.com/embed/${videoId}" frameborder="0"></iframe>`;
     }
 }
+
+function getVideoIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const joniParam = urlParams.get('joni');
+    return joniParam ? getVideoId(joniParam) : null;
+}
+
+// Auto-embed video if "joni" parameter is present in the URL
+window.onload = function() {
+    var videoId = getVideoIdFromUrl();
+    if (videoId) {
+        embedVideo(videoId);
+    }
+};
+
+document.querySelector('button').addEventListener('click', function() {
+    var link = document.getElementById('youtubeLink').value;
+    var videoId = getVideoId(link);
+    embedVideo(videoId);
+});
 </script>
 
 </body>
 </html>
-
