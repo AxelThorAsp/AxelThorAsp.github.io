@@ -3,7 +3,7 @@
 <body>
 
 <input id="youtubeLink" />
-<button onclick="embedVideo()">Embed</button>
+<button id="embedButton">Embed</button>
 
 <div id="videoContainer"></div>
 
@@ -52,7 +52,7 @@ window.onload = function() {
     }
 };
 
-document.querySelector('button').addEventListener('click', handleEmbed);
+document.getElementById('eventButton').addEventListener('click', handleEmbed);
 </script>
 
 </body>
