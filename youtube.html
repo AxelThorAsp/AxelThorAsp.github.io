@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input id="youtubeLink" />
+<button onclick="embedVideo()">Embed</button>
+
+<div id="videoContainer"></div>
+
+<script>
+function getVideoId(link) {
+    if (link.includes("youtu.be")) {
+        videoId = link.split("/")[-1]?.split("?")[0];
+    }
+    else {
+        videoId = link.split('v=')[1]?.split('&')[0];
+    }
+    return videoId;
+}
+function embedVideo() {
+    var link = document.getElementById('youtubeLink').value;
+    var videoId = getVideoId(link)
+    if (videoId) {
+        document.getElementById('videoContainer').innerHTML = `<iframe width="420" height="345" src="https://www.youtube.com/embed/${videoId}" frameborder="0"></iframe>`;
+    }
+}
+</script>
+
+</body>
+</html>
+
