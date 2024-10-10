@@ -9,7 +9,6 @@
 
 <script>
 function getVideoId(link) {
-    function getVideoId(link) {
     var videoId;
     if (link.includes("youtu.be")) {
         videoId = link.split("/").pop().split("?")[0];
@@ -17,7 +16,6 @@ function getVideoId(link) {
         videoId = link.split('v=')[1]?.split('&')[0];
     }
     return videoId;
-}
 }
 function embedVideo() {
     var link = document.getElementById('youtubeLink').value;
