@@ -1,0 +1,38 @@
+<html>
+<body>
+
+<h1>Hello WASM </h1>
+
+<input type="number" id="num1">
+<input type="number" id="num2">
+<button id="addButton">Add</button>
+
+<p id="result"></p>
+
+<script>
+let wasmInstance;
+
+async function loadWasm() {
+    const response = await fetch('hello.wasm');
+    const bytes = await response.arrayBuffer();
+    const { instance } = await WebAssembly.instantiate(bytes);
+    wasmInstance = instance;
+}
+
+document.getElementById('addButton').addEventListener('click', () => {
+    if (!wasmInstance) {
+        alert('WASM module not loaded yet!');
+        return;
+    }
+    const num1 = parseInt(document.getElementById('num1').value, 10);
+    const num2 = parseInt(document.getElementById('num2').value, 10);
+    const result = wasmInstance.exports.add(num1, num2);
+    document.getElementById('result').textContent = `Result: ${result}`;
+});
+
+loadWasm();
+</script>
+
+</body>
+</html>
+
