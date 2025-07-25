@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input id="tiktokLink" placeholder="Paste TikTok video URL here" />
+<button id="embedButton">Embed</button>
+
+<div id="videoContainer"></div>
+
+<script>
+function getTikTokEmbedUrl(link) {
+    try {
+        // Accept both share links and standard TikTok URLs
+        let url = new URL(link);
+        if (url.hostname.includes("tiktok.com")) {
+            // Typical format: https://www.tiktok.com/@username/video/VIDEO_ID
+            // Sometimes share links: https://vm.tiktok.com/XXXX/
+            // We'll embed using the full URL
+            return url.href;
+        }
+        return null;
+    } catch (e) {
+        return null;
+    }
+}
+
+function embedVideo(tiktokUrl) {
+    if (tiktokUrl) {
+        document.getElementById('videoContainer').innerHTML = 
+            `<iframe width="325" height="575" 
+                src="https://www.tiktok.com/embed/v2?url=${encodeURIComponent(tiktokUrl)}"
+                frameborder="0" allowfullscreen></iframe>`;
+    } else {
+        alert("Invalid TikTok URL. Please try again.");
+    }
+}
+
+function getTikTokUrlFromParam() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const joniParam = urlParams.get('joni');
+    return joniParam ? getTikTokEmbedUrl(joniParam) : null;
+}
+
+function handleEmbed() {
+    var link = document.getElementById('tiktokLink').value;
+    var tiktokUrl = getTikTokEmbedUrl(link);
+    embedVideo(tiktokUrl);
+}
+
+// Auto-embed video if "joni" parameter is present in the URL
+window.onload = function() {
+    var tiktokUrl = getTikTokUrlFromParam();
+    if (tiktokUrl) {
+        embedVideo(tiktokUrl);
+    }
+};
+
+document.getElementById('embedButton').addEventListener('click', handleEmbed);
+</script>
+
+</body>
+</html>
