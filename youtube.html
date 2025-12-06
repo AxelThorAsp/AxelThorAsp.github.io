@@ -23,32 +23,45 @@ function getVideoId(link) {
     }
 }
 
-function embedVideo(videoId) {
-    if (videoId) {
-        document.getElementById('videoContainer').innerHTML = 
-            `<iframe width="420" height="345" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
-    } else {
+function embedVideo(link) {
+    try {
+        let url = new URL(link);
+        let videoId = url.searchParams.get("v");
+
+        if (!videoId && link.includes("youtu.be")) {
+            videoId = link.split("/").pop().split("?")[0];
+        }
+        if (videoId) {
+          document.getElementById('videoContainer').innerHTML = 
+              `<iframe width="420" height="345" src="https://www.youtube-nocookie.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+        } else if (link.includes("shorts")) {
+          videoId = link.split("?")[0].split("/").pop();
+          if (videoId) {
+            document.getElementById('videoContainer').innerHTML = 
+                `<iframe width="420" height="700" src="https://www.youtube-nocookie.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
+          }
+        }
+    } catch (e) {
         alert("Invalid YouTube URL. Please try again.");
     }
 }
 
-function getVideoIdFromUrl() {
+function getVideoLinkFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     const joniParam = urlParams.get('joni');
-    return joniParam ? getVideoId(joniParam) : null;
+    return joniParam;
 }
 
 function handleEmbed() {
     var link = document.getElementById('youtubeLink').value;
-    var videoId = getVideoId(link);
-    embedVideo(videoId);
+    embedVideo(link);
 }
 
 // Auto-embed video if "joni" parameter is present in the URL
 window.onload = function() {
-    var videoId = getVideoIdFromUrl();
-    if (videoId) {
-        embedVideo(videoId);
+    var link = getVideoLinkFromUrl();
+    if (link) {
+        embedVideo(link);
     }
 };
 
