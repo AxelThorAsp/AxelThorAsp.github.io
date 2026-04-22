@@ -39,7 +39,8 @@
 </head>
 <body>
   <div class="row">
-    <input id="youtubeLink" type="text" placeholder="Paste a YouTube URL…" />
+    <input id="youtubeLink" type="url" inputmode="url" autocomplete="off"
+           spellcheck="false" placeholder="Paste a YouTube URL…" />
     <button id="embedButton">Embed</button>
   </div>
   <div id="error" role="alert"></div>
@@ -47,12 +48,16 @@
 
 <script>
 const DEFAULT_TITLE = "YouTube Embedder";
+const VIDEO_ID_RE = /^[A-Za-z0-9_-]{11}$/;
+const isValidId = (id) => typeof id === "string" && VIDEO_ID_RE.test(id);
 
-// "42", "42s", "1m30s", "1h2m3s" -> seconds
+// "42", "42s", "1m30s", "1h2m3s" -> seconds. Returns 0 for unrecognized input.
 function parseTimestamp(t) {
   if (!t) return 0;
-  if (/^\d+$/.test(t)) return parseInt(t, 10);
-  const m = t.match(/(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?/);
+  const s = String(t).trim();
+  if (/^\d+$/.test(s)) return parseInt(s, 10);
+  // Anchored so garbage like "1h2x3m" doesn't partial-match
+  const m = s.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/);
   if (!m) return 0;
   return (+m[1] || 0) * 3600 + (+m[2] || 0) * 60 + (+m[3] || 0);
 }
@@ -60,17 +65,33 @@ function parseTimestamp(t) {
 function parseYouTube(link) {
   try {
     const url = new URL(link);
-    const start = parseTimestamp(url.searchParams.get("t"));
+    const host = url.hostname.toLowerCase();
+
+    // Timestamp from ?t= or #t= (older share format uses the hash)
+    const hashT = url.hash.startsWith("#t=") ? url.hash.slice(3) : null;
+    const start = parseTimestamp(url.searchParams.get("t") || hashT);
+
+    // youtube.com/watch?v=ID (also m.*, music.*)
     const v = url.searchParams.get("v");
-    if (v) return { id: v, shorts: false, start };
-    const shortsMatch = url.pathname.match(/^\/shorts\/([^/?]+)/);
-    if (shortsMatch) return { id: shortsMatch[1], shorts: true, start };
-    if (url.hostname.includes("youtu.be")) {
+    if (isValidId(v)) return { id: v, shorts: false, start };
+
+    // youtu.be/ID — exact hostname match, not substring (prevents host spoofing)
+    if (host === "youtu.be" || host.endsWith(".youtu.be")) {
       const id = url.pathname.slice(1).split("/")[0];
-      if (id) return { id, shorts: false, start };
+      if (isValidId(id)) return { id, shorts: false, start };
     }
-    const embedMatch = url.pathname.match(/^\/embed\/([^/?]+)/);
-    if (embedMatch) return { id: embedMatch[1], shorts: false, start };
+
+    // Path-based forms: /shorts/ID, /live/ID, /embed/ID
+    const paths = [
+      { re: /^\/shorts\/([^/?]+)/, shorts: true },
+      { re: /^\/live\/([^/?]+)/, shorts: false },
+      { re: /^\/embed\/([^/?]+)/, shorts: false },
+    ];
+    for (const { re, shorts } of paths) {
+      const m = url.pathname.match(re);
+      if (m && isValidId(m[1])) return { id: m[1], shorts, start };
+    }
+
     return null;
   } catch {
     return null;
@@ -117,12 +138,13 @@ function embedVideo(link, { fromHistory = false } = {}) {
     }
   }
 
+  // ID is validated against [A-Za-z0-9_-]{11} so direct interpolation is safe
   const cls = info.shorts ? "shorts" : "";
-  const src = `https://www.youtube-nocookie.com/embed/${info.id}`
-            + (info.start ? `?start=${info.start}` : "");
+  const src = `https://www.youtube-nocookie.com/embed/${info.id}?autoplay=1`
+            + (info.start ? `&start=${info.start}` : "");
   container.innerHTML =
-    `<iframe class="${cls}" src="${src}" ` +
-    `allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ` +
+    `<iframe class="${cls}" src="${src}" title="YouTube video player" ` +
+    `allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" ` +
     `allowfullscreen></iframe>`;
 
   // Reset tab title while we fetch so the old one doesn't linger
@@ -130,7 +152,7 @@ function embedVideo(link, { fromHistory = false } = {}) {
   currentLink = link;
 
   fetchTitle(link).then((title) => {
-    if (link !== currentLink || !title) return; // newer embed happened, or fetch failed
+    if (link !== currentLink || !title) return;
     document.title = title;
   });
 }
@@ -139,7 +161,9 @@ document.getElementById("embedButton").addEventListener("click", () => embedVide
 input.addEventListener("keydown", (e) => { if (e.key === "Enter") embedVideo(input.value.trim()); });
 
 input.addEventListener("paste", (e) => {
-  const pasted = (e.clipboardData || window.clipboardData).getData("text").trim();
+  const clipboard = e.clipboardData || window.clipboardData;
+  if (!clipboard) return;
+  const pasted = (clipboard.getData("text") || "").trim();
   if (pasted) {
     e.preventDefault();
     embedVideo(pasted);
