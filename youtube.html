@@ -46,6 +46,8 @@
   <div id="videoContainer"></div>
 
 <script>
+const DEFAULT_TITLE = "YouTube Embedder";
+
 // "42", "42s", "1m30s", "1h2m3s" -> seconds
 function parseTimestamp(t) {
   if (!t) return 0;
@@ -75,9 +77,24 @@ function parseYouTube(link) {
   }
 }
 
+async function fetchTitle(link) {
+  try {
+    const endpoint = `https://www.youtube.com/oembed?url=${encodeURIComponent(link)}&format=json`;
+    const res = await fetch(endpoint);
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.title || null;
+  } catch {
+    return null;
+  }
+}
+
 const input = document.getElementById("youtubeLink");
 const errorEl = document.getElementById("error");
 const container = document.getElementById("videoContainer");
+
+// Tracks the latest embed request so stale title responses don't overwrite newer ones
+let currentLink = null;
 
 function embedVideo(link, { fromHistory = false } = {}) {
   errorEl.textContent = "";
@@ -85,13 +102,13 @@ function embedVideo(link, { fromHistory = false } = {}) {
   if (!info) {
     errorEl.textContent = "Couldn't find a video ID in that URL.";
     container.innerHTML = "";
+    document.title = DEFAULT_TITLE;
+    currentLink = null;
     return;
   }
 
-  // Keep input in sync with what's playing
   if (input.value !== link) input.value = link;
 
-  // URL state: push a new entry only on genuinely new videos
   if (!fromHistory) {
     const url = new URL(window.location.href);
     if (url.searchParams.get("joni") !== link) {
@@ -107,12 +124,20 @@ function embedVideo(link, { fromHistory = false } = {}) {
     `<iframe class="${cls}" src="${src}" ` +
     `allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ` +
     `allowfullscreen></iframe>`;
+
+  // Reset tab title while we fetch so the old one doesn't linger
+  document.title = DEFAULT_TITLE;
+  currentLink = link;
+
+  fetchTitle(link).then((title) => {
+    if (link !== currentLink || !title) return; // newer embed happened, or fetch failed
+    document.title = title;
+  });
 }
 
 document.getElementById("embedButton").addEventListener("click", () => embedVideo(input.value.trim()));
 input.addEventListener("keydown", (e) => { if (e.key === "Enter") embedVideo(input.value.trim()); });
 
-// Paste-to-embed: skip the click entirely
 input.addEventListener("paste", (e) => {
   const pasted = (e.clipboardData || window.clipboardData).getData("text").trim();
   if (pasted) {
@@ -121,10 +146,8 @@ input.addEventListener("paste", (e) => {
   }
 });
 
-// Click-to-select so typing/pasting replaces the current URL cleanly
 input.addEventListener("focus", () => input.select());
 
-// Back/forward button follows the URL state
 window.addEventListener("popstate", () => {
   const link = new URLSearchParams(window.location.search).get("joni");
   if (link) {
@@ -133,6 +156,8 @@ window.addEventListener("popstate", () => {
     input.value = "";
     container.innerHTML = "";
     errorEl.textContent = "";
+    document.title = DEFAULT_TITLE;
+    currentLink = null;
   }
 });
 
