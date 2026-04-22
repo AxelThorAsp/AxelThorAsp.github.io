@@ -46,57 +46,103 @@
   <div id="videoContainer"></div>
 
 <script>
+// "42", "42s", "1m30s", "1h2m3s" -> seconds
+function parseTimestamp(t) {
+  if (!t) return 0;
+  if (/^\d+$/.test(t)) return parseInt(t, 10);
+  const m = t.match(/(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?/);
+  if (!m) return 0;
+  return (+m[1] || 0) * 3600 + (+m[2] || 0) * 60 + (+m[3] || 0);
+}
+
 function parseYouTube(link) {
   try {
     const url = new URL(link);
-    // youtube.com/watch?v=ID
+    const start = parseTimestamp(url.searchParams.get("t"));
     const v = url.searchParams.get("v");
-    if (v) return { id: v, shorts: false };
-    // youtube.com/shorts/ID
+    if (v) return { id: v, shorts: false, start };
     const shortsMatch = url.pathname.match(/^\/shorts\/([^/?]+)/);
-    if (shortsMatch) return { id: shortsMatch[1], shorts: true };
-    // youtu.be/ID
+    if (shortsMatch) return { id: shortsMatch[1], shorts: true, start };
     if (url.hostname.includes("youtu.be")) {
       const id = url.pathname.slice(1).split("/")[0];
-      if (id) return { id, shorts: false };
+      if (id) return { id, shorts: false, start };
     }
-    // youtube.com/embed/ID
     const embedMatch = url.pathname.match(/^\/embed\/([^/?]+)/);
-    if (embedMatch) return { id: embedMatch[1], shorts: false };
+    if (embedMatch) return { id: embedMatch[1], shorts: false, start };
     return null;
   } catch {
     return null;
   }
 }
 
-function embedVideo(link) {
-  const errorEl = document.getElementById("error");
-  const container = document.getElementById("videoContainer");
-  errorEl.textContent = "";
+const input = document.getElementById("youtubeLink");
+const errorEl = document.getElementById("error");
+const container = document.getElementById("videoContainer");
 
+function embedVideo(link, { fromHistory = false } = {}) {
+  errorEl.textContent = "";
   const info = parseYouTube(link);
   if (!info) {
     errorEl.textContent = "Couldn't find a video ID in that URL.";
     container.innerHTML = "";
     return;
   }
+
+  // Keep input in sync with what's playing
+  if (input.value !== link) input.value = link;
+
+  // URL state: push a new entry only on genuinely new videos
+  if (!fromHistory) {
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("joni") !== link) {
+      url.searchParams.set("joni", link);
+      history.pushState(null, "", url);
+    }
+  }
+
   const cls = info.shorts ? "shorts" : "";
+  const src = `https://www.youtube-nocookie.com/embed/${info.id}`
+            + (info.start ? `?start=${info.start}` : "");
   container.innerHTML =
-    `<iframe class="${cls}" src="https://www.youtube-nocookie.com/embed/${info.id}" ` +
+    `<iframe class="${cls}" src="${src}" ` +
     `allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ` +
     `allowfullscreen></iframe>`;
 }
 
-const input = document.getElementById("youtubeLink");
-document.getElementById("embedButton").addEventListener("click", () => embedVideo(input.value));
-input.addEventListener("keydown", (e) => { if (e.key === "Enter") embedVideo(input.value); });
+document.getElementById("embedButton").addEventListener("click", () => embedVideo(input.value.trim()));
+input.addEventListener("keydown", (e) => { if (e.key === "Enter") embedVideo(input.value.trim()); });
 
-// Auto-embed if ?joni=URL is present
+// Paste-to-embed: skip the click entirely
+input.addEventListener("paste", (e) => {
+  const pasted = (e.clipboardData || window.clipboardData).getData("text").trim();
+  if (pasted) {
+    e.preventDefault();
+    embedVideo(pasted);
+  }
+});
+
+// Click-to-select so typing/pasting replaces the current URL cleanly
+input.addEventListener("focus", () => input.select());
+
+// Back/forward button follows the URL state
+window.addEventListener("popstate", () => {
+  const link = new URLSearchParams(window.location.search).get("joni");
+  if (link) {
+    embedVideo(link, { fromHistory: true });
+  } else {
+    input.value = "";
+    container.innerHTML = "";
+    errorEl.textContent = "";
+  }
+});
+
 window.addEventListener("load", () => {
   const link = new URLSearchParams(window.location.search).get("joni");
   if (link) {
     input.value = link;
-    embedVideo(link);
+    embedVideo(link, { fromHistory: true });
+  } else {
+    input.focus();
   }
 });
 </script>
