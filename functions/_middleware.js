@@ -5,6 +5,11 @@
 
 export async function onRequest(context) {
   const url = new URL(context.request.url);
+
+  // Scope: only act on the embedder page
+  if (!url.pathname.endsWith("/youtube.html") && url.pathname !== "/youtube") {
+    return context.next();
+  }
   const videoLink = url.searchParams.get("joni");
 
   // Always fetch the static HTML first
