@@ -118,8 +118,8 @@ function embedVideo(link, { fromHistory = false } = {}) {
   }
 
   const cls = info.shorts ? "shorts" : "";
-  const src = `https://www.youtube-nocookie.com/embed/${info.id}`
-            + (info.start ? `?start=${info.start}` : "");
+  const src = `https://www.youtube-nocookie.com/embed/${info.id}?autoplay=1`
+            + (info.start ? `&start=${info.start}` : "");
   container.innerHTML =
     `<iframe class="${cls}" src="${src}" ` +
     `allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ` +
