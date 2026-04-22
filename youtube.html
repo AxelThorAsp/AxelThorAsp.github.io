@@ -1,72 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube Embedder</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    max-width: 640px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: #fff;
+    color: #111;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: #121212; color: #eee; }
+    input, button {
+      background: #1e1e1e;
+      color: #eee;
+      border: 1px solid #444;
+    }
+  }
+  .row { display: flex; gap: 0.5rem; margin-bottom: 0.5rem; }
+  input { flex: 1; padding: 0.5rem; font-size: 1rem; }
+  button { padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer; }
+  #error { color: #e55; min-height: 1.5em; margin-bottom: 0.5rem; }
+  #videoContainer iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+  }
+  #videoContainer iframe.shorts {
+    aspect-ratio: 9 / 16;
+    max-width: 360px;
+  }
+</style>
+</head>
 <body>
-
-<input id="youtubeLink" />
-<button id="embedButton">Embed</button>
-
-<div id="videoContainer"></div>
+  <div class="row">
+    <input id="youtubeLink" type="text" placeholder="Paste a YouTube URL…" />
+    <button id="embedButton">Embed</button>
+  </div>
+  <div id="error" role="alert"></div>
+  <div id="videoContainer"></div>
 
 <script>
-function getVideoId(link) {
-    try {
-        let url = new URL(link);
-        let videoId = url.searchParams.get("v");
-
-        if (!videoId && link.includes("youtu.be")) {
-            videoId = link.split("/").pop().split("?")[0];
-        }
-
-        return videoId;
-    } catch (e) {
-        return null;
+function parseYouTube(link) {
+  try {
+    const url = new URL(link);
+    // youtube.com/watch?v=ID
+    const v = url.searchParams.get("v");
+    if (v) return { id: v, shorts: false };
+    // youtube.com/shorts/ID
+    const shortsMatch = url.pathname.match(/^\/shorts\/([^/?]+)/);
+    if (shortsMatch) return { id: shortsMatch[1], shorts: true };
+    // youtu.be/ID
+    if (url.hostname.includes("youtu.be")) {
+      const id = url.pathname.slice(1).split("/")[0];
+      if (id) return { id, shorts: false };
     }
+    // youtube.com/embed/ID
+    const embedMatch = url.pathname.match(/^\/embed\/([^/?]+)/);
+    if (embedMatch) return { id: embedMatch[1], shorts: false };
+    return null;
+  } catch {
+    return null;
+  }
 }
 
 function embedVideo(link) {
-    try {
-        let url = new URL(link);
-        let videoId = url.searchParams.get("v");
+  const errorEl = document.getElementById("error");
+  const container = document.getElementById("videoContainer");
+  errorEl.textContent = "";
 
-        if (!videoId && link.includes("youtu.be")) {
-            videoId = link.split("/").pop().split("?")[0];
-        }
-        if (videoId) {
-          document.getElementById('videoContainer').innerHTML = 
-              `<iframe width="420" height="345" src="https://www.youtube-nocookie.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
-        } else if (link.includes("shorts")) {
-          videoId = link.split("?")[0].split("/").pop();
-          if (videoId) {
-            document.getElementById('videoContainer').innerHTML = 
-                `<iframe width="420" height="700" src="https://www.youtube-nocookie.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>`;
-          }
-        }
-    } catch (e) {
-        alert("Invalid YouTube URL. Please try again.");
-    }
+  const info = parseYouTube(link);
+  if (!info) {
+    errorEl.textContent = "Couldn't find a video ID in that URL.";
+    container.innerHTML = "";
+    return;
+  }
+  const cls = info.shorts ? "shorts" : "";
+  container.innerHTML =
+    `<iframe class="${cls}" src="https://www.youtube-nocookie.com/embed/${info.id}" ` +
+    `allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" ` +
+    `allowfullscreen></iframe>`;
 }
 
-function getVideoLinkFromUrl() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const joniParam = urlParams.get('joni');
-    return joniParam;
-}
+const input = document.getElementById("youtubeLink");
+document.getElementById("embedButton").addEventListener("click", () => embedVideo(input.value));
+input.addEventListener("keydown", (e) => { if (e.key === "Enter") embedVideo(input.value); });
 
-function handleEmbed() {
-    var link = document.getElementById('youtubeLink').value;
+// Auto-embed if ?joni=URL is present
+window.addEventListener("load", () => {
+  const link = new URLSearchParams(window.location.search).get("joni");
+  if (link) {
+    input.value = link;
     embedVideo(link);
-}
-
-// Auto-embed video if "joni" parameter is present in the URL
-window.onload = function() {
-    var link = getVideoLinkFromUrl();
-    if (link) {
-        embedVideo(link);
-    }
-};
-
-document.getElementById('embedButton').addEventListener('click', handleEmbed);
+  }
+});
 </script>
-
 </body>
 </html>
