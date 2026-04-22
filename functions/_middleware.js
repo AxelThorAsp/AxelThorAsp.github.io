@@ -3,6 +3,9 @@
 // fetches the video's oEmbed metadata and injects OpenGraph tags into
 // the HTML so Discord/iMessage/Twitter/Slack can render a preview.
 
+const VIDEO_ID_RE = /^[A-Za-z0-9_-]{11}$/;
+const isValidId = (id) => typeof id === "string" && VIDEO_ID_RE.test(id);
+
 export async function onRequest(context) {
   const url = new URL(context.request.url);
 
@@ -10,9 +13,8 @@ export async function onRequest(context) {
   if (!url.pathname.endsWith("/youtube.html") && url.pathname !== "/youtube") {
     return context.next();
   }
-  const videoLink = url.searchParams.get("joni");
 
-  // Always fetch the static HTML first
+  const videoLink = url.searchParams.get("joni");
   const response = await context.next();
 
   if (!videoLink) return response;
@@ -69,15 +71,23 @@ export async function onRequest(context) {
 function extractVideoId(link) {
   try {
     const u = new URL(link);
+    const host = u.hostname.toLowerCase();
+
     const v = u.searchParams.get("v");
-    if (v) return v;
-    const shorts = u.pathname.match(/^\/shorts\/([^/?]+)/);
-    if (shorts) return shorts[1];
-    if (u.hostname.includes("youtu.be")) {
-      return u.pathname.slice(1).split("/")[0] || null;
+    if (isValidId(v)) return v;
+
+    // Exact/suffix hostname match only — prevents spoofing via e.g. evil-youtu.be.com
+    if (host === "youtu.be" || host.endsWith(".youtu.be")) {
+      const id = u.pathname.slice(1).split("/")[0];
+      if (isValidId(id)) return id;
     }
-    const embed = u.pathname.match(/^\/embed\/([^/?]+)/);
-    if (embed) return embed[1];
+
+    const patterns = [/^\/shorts\/([^/?]+)/, /^\/live\/([^/?]+)/, /^\/embed\/([^/?]+)/];
+    for (const re of patterns) {
+      const m = u.pathname.match(re);
+      if (m && isValidId(m[1])) return m[1];
+    }
+
     return null;
   } catch {
     return null;
