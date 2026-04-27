@@ -5,7 +5,7 @@
     'use strict';
 
     const MAX_GUESSES = 5;
-    const GAME_URL = 'https://axelthorasp.github.io/elementle.html';
+    const GAME_URL = window.location.origin + window.location.pathname;
 
     // Numeric closeness thresholds
     const THRESHOLDS = {
