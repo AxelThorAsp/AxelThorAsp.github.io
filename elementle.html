@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elementle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/elementle.css">
+</head>
+<body>
+    <header class="el-header">
+        <h1>Elementle</h1>
+        <div class="el-meta">
+            <span id="puzzle-date"></span>
+            <span class="sep">|</span>
+            <span>Guesses left: <strong id="guesses-left">5</strong>/5</span>
+        </div>
+        <p class="el-tagline">Guess the daily element from the periodic table. You have 5 tries.</p>
+    </header>
+
+    <main class="el-main">
+        <div class="el-input-row">
+            <div class="el-autocomplete">
+                <input
+                    id="guess-input"
+                    type="text"
+                    autocomplete="off"
+                    spellcheck="false"
+                    placeholder="Type an element name or symbol..."
+                    aria-label="Element guess">
+                <ul id="suggestions" class="suggestions" hidden></ul>
+            </div>
+            <button id="submit-btn" type="button">Guess</button>
+        </div>
+        <div id="error-msg" class="error-msg" role="alert"></div>
+
+        <div class="legend">
+            <div class="legend-item"><span class="tile-mini exact"></span> Exact</div>
+            <div class="legend-item"><span class="tile-mini close"></span> Close</div>
+            <div class="legend-item"><span class="tile-mini far"></span> Far / wrong</div>
+        </div>
+
+        <div class="grid-wrapper">
+            <div class="grid-header" aria-hidden="true">
+                <div>Symbol</div>
+                <div>Atomic #</div>
+                <div>Mass</div>
+                <div>Group</div>
+                <div>Period</div>
+                <div>Discovered</div>
+                <div>State</div>
+            </div>
+            <div id="guess-grid" class="guess-grid"></div>
+        </div>
+
+        <div id="endgame" class="endgame" hidden>
+            <h2 id="endgame-title"></h2>
+            <p id="endgame-detail"></p>
+            <div class="endgame-actions">
+                <button id="share-btn" type="button">Share</button>
+                <span id="share-feedback" class="share-feedback"></span>
+            </div>
+        </div>
+    </main>
+
+    <footer class="el-footer">
+    </footer>
+
+    <script src="src/elements.js"></script>
+    <script src="src/elementle.js"></script>
+</body>
+</html>
